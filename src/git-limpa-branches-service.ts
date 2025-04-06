@@ -40,9 +40,7 @@ export class GitLimpaBranchesService implements IGitLimpaBranchesService {
    */
   constructor(private readonly branchesProtegidos: string[]) {
     // Exibe os branches protegidos ao inicializar
-    console.log(
-      `${this.cores.azul}Branches protegidos: ${this.branchesProtegidos.join(', ')}${this.cores.reset}\n`,
-    );
+    console.log(`${this.cores.azul}Branches protegidos: ${this.branchesProtegidos.join(', ')}${this.cores.reset}\n`);
   }
 
   /**
@@ -59,9 +57,7 @@ export class GitLimpaBranchesService implements IGitLimpaBranchesService {
       if (silencioso) {
         return erro instanceof Error ? erro.message : String(erro);
       }
-      throw new Error(
-        `Falha ao executar: ${comando}\nErro: ${erro instanceof Error ? erro.message : String(erro)}`,
-      );
+      throw new Error(`Falha ao executar: ${comando}\nErro: ${erro instanceof Error ? erro.message : String(erro)}`);
     }
   };
 
@@ -80,10 +76,7 @@ export class GitLimpaBranchesService implements IGitLimpaBranchesService {
 
       if (branchExiste !== 'nao-existe') {
         // Verifica se há commits não mesclados
-        const commitsNaoMesclados = this.executarGit(
-          `git log ${branchAlvo}..${branch} --oneline`,
-          true,
-        );
+        const commitsNaoMesclados = this.executarGit(`git log ${branchAlvo}..${branch} --oneline`, true);
         if (commitsNaoMesclados && commitsNaoMesclados.length > 0) {
           return true;
         }
@@ -144,10 +137,7 @@ export class GitLimpaBranchesService implements IGitLimpaBranchesService {
    * @param comando - O comando a ser executado
    * @returns True se o usuário confirmou, false caso contrário
    */
-  public confirmarEExecutar: ConfirmarEExecutarFn = async (
-    mensagem,
-    comando,
-  ) => {
+  public confirmarEExecutar: ConfirmarEExecutarFn = async (mensagem, comando) => {
     const resposta = await this.fazerPergunta(`${mensagem} (s/N) `);
 
     if (resposta.toLowerCase().startsWith('s')) {
@@ -156,19 +146,13 @@ export class GitLimpaBranchesService implements IGitLimpaBranchesService {
         return true;
       } catch (erro) {
         const mensagemErro =
-          erro instanceof Error
-            ? erro.message
-            : String(erro).replace(/Command failed with exit code \d+:/, '');
-        console.log(
-          `${this.cores.vermelho}Erro ao executar comando: ${mensagemErro}`,
-        );
+          erro instanceof Error ? erro.message : String(erro).replace(/Command failed with exit code \d+:/, '');
+        console.log(`${this.cores.vermelho}Erro ao executar comando: ${mensagemErro}`);
         return false;
       }
     }
 
-    console.log(
-      `${this.cores.amarelo}Operação cancelada pelo usuário.${this.cores.reset}`,
-    );
+    console.log(`${this.cores.amarelo}Operação cancelada pelo usuário.${this.cores.reset}`);
     return false;
   };
 
@@ -177,15 +161,10 @@ export class GitLimpaBranchesService implements IGitLimpaBranchesService {
    * @returns Resultado da análise
    */
   public analisarBranchesGit: AnalisarBranchesGitFn = async () => {
-    console.log(
-      `${this.cores.amarelo}Iniciando análise dos branches...${this.cores.reset}\n`,
-    );
+    console.log(`${this.cores.amarelo}Iniciando análise dos branches...${this.cores.reset}\n`);
 
     // Atualiza a lista de branches remotos
-    await this.confirmarEExecutar(
-      'Deseja atualizar a lista de branches remotos?',
-      'git fetch --prune',
-    );
+    await this.confirmarEExecutar('Deseja atualizar a lista de branches remotos?', 'git fetch --prune');
 
     // Obtém todos os branches (locais e remotos)
     const branchesLocais = this.obterBranchesLocais();
@@ -216,33 +195,23 @@ export class GitLimpaBranchesService implements IGitLimpaBranchesService {
               this.executarGit(`git checkout -b ${branch} origin/${branch}`);
               branchTemporarioCriado = true;
             } else {
-              console.log(
-                `${this.cores.amarelo}Pulando análise do branch remoto '${branch}'${this.cores.reset}`,
-              );
+              console.log(`${this.cores.amarelo}Pulando análise do branch remoto '${branch}'${this.cores.reset}`);
               continue;
             }
           } catch (erro) {
             const mensagemErro =
-              erro instanceof Error
-                ? erro.message
-                : String(erro).replace(/Command failed with exit code \d+:/, '');
-            console.log(
-              `${this.cores.vermelho}Erro ao analisar branch remoto '${branch}': ${mensagemErro}`,
-            );
+              erro instanceof Error ? erro.message : String(erro).replace(/Command failed with exit code \d+:/, '');
+            console.log(`${this.cores.vermelho}Erro ao analisar branch remoto '${branch}': ${mensagemErro}`);
             continue;
           }
         }
 
         if (this.temAlteracoesNaoMescladas(branch)) {
           branchesComAlteracoes.push(branch);
-          console.log(
-            `${this.cores.vermelho}Branch '${branch}' tem alterações não mescladas${this.cores.reset}`,
-          );
+          console.log(`${this.cores.vermelho}Branch '${branch}' tem alterações não mescladas${this.cores.reset}`);
         } else {
           branchesParaExcluir.push(branch);
-          console.log(
-            `${this.cores.verde}Branch '${branch}' pode ser excluído com segurança${this.cores.reset}`,
-          );
+          console.log(`${this.cores.verde}Branch '${branch}' pode ser excluído com segurança${this.cores.reset}`);
         }
 
         // Se criamos um branch temporário, removemos ele
@@ -253,15 +222,11 @@ export class GitLimpaBranchesService implements IGitLimpaBranchesService {
               `git checkout - && git branch -D ${branch}`,
             );
           } catch {
-            console.log(
-              `${this.cores.amarelo}Aviso: Não foi possível limpar o branch temporário${this.cores.reset}.`,
-            );
+            console.log(`${this.cores.amarelo}Aviso: Não foi possível limpar o branch temporário${this.cores.reset}.`);
           }
         }
       } else {
-        console.log(
-          `${this.cores.azul}Branch '${branch}' está protegido${this.cores.reset}`,
-        );
+        console.log(`${this.cores.azul}Branch '${branch}' está protegido${this.cores.reset}`);
       }
     }
 
@@ -273,21 +238,16 @@ export class GitLimpaBranchesService implements IGitLimpaBranchesService {
    * @param resultado - O resultado da análise de branches
    */
   public exibirResumo(resultado: ResultadoAnalise): void {
-    const { branchesParaExcluir, branchesComAlteracoes, infoRemotoLocal } =
-      resultado;
+    const { branchesParaExcluir, branchesComAlteracoes, infoRemotoLocal } = resultado;
 
     if (branchesParaExcluir.length === 0) {
-      console.log(
-        `\n${this.cores.amarelo}Não há branches seguros para excluir.${this.cores.reset}`,
-      );
+      console.log(`\n${this.cores.amarelo}Não há branches seguros para excluir.${this.cores.reset}`);
       return;
     }
 
     // Mostra resumo
     console.log(`\n${this.cores.amarelo}Resumo:${this.cores.reset}`);
-    console.log(
-      `${this.cores.verde}Branches que podem ser excluídos:${this.cores.reset}`,
-    );
+    console.log(`${this.cores.verde}Branches que podem ser excluídos:${this.cores.reset}`);
     branchesParaExcluir.forEach((b) => {
       const info = infoRemotoLocal[b];
       const local = info.existeLocal ? 'local' : '';
@@ -297,9 +257,7 @@ export class GitLimpaBranchesService implements IGitLimpaBranchesService {
     });
 
     if (branchesComAlteracoes.length > 0) {
-      console.log(
-        `\n${this.cores.vermelho}Branches com alterações não mescladas (serão mantidos):${this.cores.reset}`,
-      );
+      console.log(`\n${this.cores.vermelho}Branches com alterações não mescladas (serão mantidos):${this.cores.reset}`);
       branchesComAlteracoes.forEach((b) => console.log(b));
     }
   }
@@ -310,22 +268,17 @@ export class GitLimpaBranchesService implements IGitLimpaBranchesService {
    * @returns True se a exclusão foi bem-sucedida para todos os branches
    */
   public excluirBranches: ExcluirBranchesFn = async (resultado) => {
-    const { branchesParaExcluir, branchesComAlteracoes, infoRemotoLocal } =
-      resultado;
+    const { branchesParaExcluir, branchesComAlteracoes, infoRemotoLocal } = resultado;
 
     if (branchesParaExcluir.length === 0) {
       return true;
     }
 
     // Pede confirmação geral
-    const respostaGeral = await this.fazerPergunta(
-      '\nDeseja prosseguir com a exclusão dos branches seguros? (s/N) ',
-    );
+    const respostaGeral = await this.fazerPergunta('\nDeseja prosseguir com a exclusão dos branches seguros? (s/N) ');
 
     if (!respostaGeral.toLowerCase().startsWith('s')) {
-      console.log(
-        `${this.cores.amarelo}Operação cancelada.${this.cores.reset}`,
-      );
+      console.log(`${this.cores.amarelo}Operação cancelada.${this.cores.reset}`);
       return false;
     }
 
@@ -342,9 +295,7 @@ export class GitLimpaBranchesService implements IGitLimpaBranchesService {
         );
 
         if (sucesso) {
-          console.log(
-            `${this.cores.verde}Branch local '${branch}' excluído com sucesso${this.cores.reset}`,
-          );
+          console.log(`${this.cores.verde}Branch local '${branch}' excluído com sucesso${this.cores.reset}`);
         } else {
           sucessoTotal = false;
         }
@@ -358,9 +309,7 @@ export class GitLimpaBranchesService implements IGitLimpaBranchesService {
         );
 
         if (sucesso) {
-          console.log(
-            `${this.cores.verde}Branch remoto '${branch}' excluído com sucesso${this.cores.reset}`,
-          );
+          console.log(`${this.cores.verde}Branch remoto '${branch}' excluído com sucesso${this.cores.reset}`);
         } else {
           sucessoTotal = false;
         }
@@ -368,13 +317,9 @@ export class GitLimpaBranchesService implements IGitLimpaBranchesService {
     }
 
     if (sucessoTotal) {
-      console.log(
-        `\n${this.cores.verde}Limpeza concluída com sucesso!${this.cores.reset}`,
-      );
+      console.log(`\n${this.cores.verde}Limpeza concluída com sucesso!${this.cores.reset}`);
     } else {
-      console.log(
-        `\n${this.cores.amarelo}Limpeza concluída com alguns erros.${this.cores.reset}`,
-      );
+      console.log(`\n${this.cores.amarelo}Limpeza concluída com alguns erros.${this.cores.reset}`);
     }
 
     console.log(

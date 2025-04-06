@@ -39,7 +39,7 @@ export interface BranchInfo {
 export interface ArgvOptions {
   protegidos: string;
   help?: boolean;
-  [key: string]: any; // Para outras opções que possam ser adicionadas no futuro
+  [key: string]: unknown; // Para outras opções que possam ser adicionadas no futuro
 }
 
 /**
@@ -102,10 +102,7 @@ export type FazerPerguntaFn = (pergunta: string) => Promise<string>;
  * @param {string} comando - O comando a ser executado
  * @returns {Promise<boolean>} True se o usuário confirmou, false caso contrário
  */
-export type ConfirmarEExecutarFn = (
-  mensagem: string,
-  comando: string,
-) => Promise<boolean>;
+export type ConfirmarEExecutarFn = (mensagem: string, comando: string) => Promise<boolean>;
 
 /**
  * Função principal do programa
@@ -127,9 +124,7 @@ export type AnalisarBranchesGitFn = () => Promise<ResultadoAnalise>;
  * @param {ResultadoAnalise} resultado - O resultado da análise de branches
  * @returns {Promise<boolean>} True se a exclusão foi bem-sucedida para todos os branches
  */
-export type ExcluirBranchesFn = (
-  resultado: ResultadoAnalise,
-) => Promise<boolean>;
+export type ExcluirBranchesFn = (resultado: ResultadoAnalise) => Promise<boolean>;
 
 /**
  * Interface que define o contrato para o serviço de limpeza de branches Git

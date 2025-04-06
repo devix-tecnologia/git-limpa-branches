@@ -3,8 +3,7 @@
  * @fileoverview Ponto de entrada principal do utilitário git-limpa-branches
  */
 
-import minimist from 'minimist';
-import type { ParsedArgs } from 'minimist';
+import minimist, { type ParsedArgs } from 'minimist';
 import { ArgvOptions } from './git-limpa-branches.types.js';
 import { GitLimpaBranchesService } from './git-limpa-branches-service.js';
 
@@ -70,9 +69,7 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   // Executa a função principal
   gitService.main().catch((erro) => {
     const cores = gitService.getCores();
-    console.error(
-      `${cores.vermelho}Erro fatal: ${erro instanceof Error ? erro.message : String(erro)}${cores.reset}`,
-    );
+    console.error(`${cores.vermelho}Erro fatal: ${erro instanceof Error ? erro.message : String(erro)}${cores.reset}`);
     process.exit(1);
   });
 }
