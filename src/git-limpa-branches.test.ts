@@ -4,15 +4,15 @@ import { GitLimpaBranchesService } from './git-limpa-branches-service.js';
 
 // Mock para child_process.execSync
 vi.mock('child_process', () => ({
-  execSync: vi.fn()
+  execSync: vi.fn(),
 }));
 
 // Mock para readline
 vi.mock('readline', () => ({
   createInterface: vi.fn(() => ({
     question: vi.fn((pergunta, callback) => callback('resposta do usuario')),
-    close: vi.fn()
-  }))
+    close: vi.fn(),
+  })),
 }));
 
 describe('GitLimpaBranchesService', () => {
@@ -134,10 +134,10 @@ describe('GitLimpaBranchesService', () => {
       service.temAlteracoesNaoMescladas('feature-branch');
       
       // Verifica se foi chamado para cada branch protegido
-      branchesProtegidos.forEach(branch => {
+      branchesProtegidos.forEach((branch) => {
         expect(execSync).toHaveBeenCalledWith(
           expect.stringContaining(branch),
-          expect.anything()
+          expect.anything(),
         );
       });
     });
@@ -186,8 +186,8 @@ describe('GitLimpaBranchesService', () => {
         infoRemotoLocal: {
           'feature-1': { existeLocal: true, existeRemoto: true },
           'feature-2': { existeLocal: true, existeRemoto: false },
-          'feature-3': { existeLocal: true, existeRemoto: true }
-        }
+          'feature-3': { existeLocal: true, existeRemoto: true },
+        },
       };
       
       // Mock para fazerPergunta (confirmação geral)
@@ -207,8 +207,8 @@ describe('GitLimpaBranchesService', () => {
         branchesParaExcluir: ['feature-1'],
         branchesComAlteracoes: [],
         infoRemotoLocal: {
-          'feature-1': { existeLocal: true, existeRemoto: true }
-        }
+          'feature-1': { existeLocal: true, existeRemoto: true },
+        },
       };
       
       // Usuário responde 'n' (não) na confirmação geral
