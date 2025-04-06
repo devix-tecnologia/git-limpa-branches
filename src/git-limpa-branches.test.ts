@@ -214,10 +214,13 @@ describe('GitLimpaBranchesService', () => {
       // Usuário responde 'n' (não) na confirmação geral
       vi.spyOn(service, 'fazerPergunta').mockResolvedValue('n');
       
+      // Precisamos criar o spy mesmo que não seja chamado
+      const confirmarSpy = vi.spyOn(service, 'confirmarEExecutar');
+      
       const resultado = await service.excluirBranches(resultadoAnalise);
       
       expect(resultado).toBe(false);
-      expect(service.confirmarEExecutar).not.toHaveBeenCalled();
+      expect(confirmarSpy).not.toHaveBeenCalled();
     });
   });
 });
