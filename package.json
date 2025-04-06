@@ -14,8 +14,8 @@
       "test": "vitest run",
       "test:watch": "vitest",
       "test:coverage": "vitest run --coverage",
-      "lint": "eslint --ext .ts ./src --config eslint.config.ts",
-      "lint:fix": "eslint --ext .ts ./src --fix --config eslint.config.ts",
+      "lint": "eslint --ext .ts ./src",
+      "lint:fix": "eslint --ext .ts ./src --fix",
       "format": "prettier --write \"src/**/*.ts\"",
       "check": "pnpm lint && pnpm test",
       "prepublishOnly": "pnpm run build"
