@@ -1,51 +1,58 @@
 {
-    "name": "git-limpa-branches",
-    "version": "1.0.0",
-    "description": "Utilitário para limpeza segura de branches Git",
-    "type": "module",
-    "main": "dist/git-limpa-branches.js",
-    "bin": {
-      "git-limpa-branches": "./dist/git-limpa-branches.js"
-    },
-    "scripts": {
-      "build": "tsc",
-      "dev": "tsc -w",
-      "start": "node dist/git-limpa-branches.js",
-      "test": "vitest run",
-      "test:watch": "vitest",
-      "test:coverage": "vitest run --coverage",
-      "lint": "eslint --ext .ts ./src",
-      "lint:fix": "eslint --ext .ts ./src --fix",
-      "format": "prettier --write \"src/**/*.ts\"",
-      "check": "pnpm lint && pnpm test",
-      "prepublishOnly": "pnpm run build"
-    },
-    "keywords": [
-      "git",
-      "branch",
-      "cleanup",
-      "utility",
-      "git-tool"
-    ],
-    "author": "",
-    "license": "MIT",
-    "dependencies": {
-      "minimist": "^1.2.8"
-    },
-    "devDependencies": {
-      "@types/eslint": "^8.56.9",
-      "@types/minimist": "^1.2.5",
-      "@types/node": "^22.14.0",
-      "@typescript-eslint/eslint-plugin": "^8.29.0",
-      "@typescript-eslint/parser": "^8.29.0",
-      "eslint": "^9.24.0",
-      "jiti": "^2.4.2",
-      "prettier": "^3.5.3",
-      "typescript": "^5.8.3",
-      "typescript-eslint": "^8.29.0",
-      "vitest": "^3.1.1"
-    },
-    "engines": {
-      "node": ">=18.0.0"
-    }
+  "name": "git-limpa-branches",
+  "version": "1.0.0",
+  "description": "Utilitário para limpeza segura de branches Git",
+  "type": "module",
+  "main": "dist/git-limpa-branches.js",
+  "bin": {
+    "git-limpa-branches": "./dist/git-limpa-branches.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc -w",
+    "start": "node dist/git-limpa-branches.js",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "lint": "eslint --ext .ts ./src",
+    "lint:fix": "eslint --ext .ts ./src --fix",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "check": "pnpm lint && pnpm test",
+    "prepublishOnly": "pnpm run build"
+  },
+  "keywords": [
+    "git",
+    "branch",
+    "cleanup",
+    "utility",
+    "git-tool"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "minimist": "^1.2.8"
+  },
+  "devDependencies": {
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/commit-analyzer": "^13.0.1",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/github": "^11.0.1",
+    "@semantic-release/npm": "^12.0.1",
+    "@semantic-release/release-notes-generator": "^14.0.3",
+    "@types/eslint": "^8.56.9",
+    "@types/minimist": "^1.2.5",
+    "@types/node": "^22.14.0",
+    "@typescript-eslint/eslint-plugin": "^8.29.0",
+    "@typescript-eslint/parser": "^8.29.0",
+    "eslint": "^9.24.0",
+    "jiti": "^2.4.2",
+    "prettier": "^3.5.3",
+    "semantic-release": "^24.2.3",
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.29.0",
+    "vitest": "^3.1.1"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
+}
