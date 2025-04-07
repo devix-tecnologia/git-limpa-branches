@@ -8,7 +8,7 @@ Com o tempo, repositórios Git acumulam dezenas ou até centenas de branches obs
 
 ## 📊 Antes e Depois
 
-![Visualização: Antes e Depois do Git-Limpa-Branches](./docs/images/git-limpa-branches-visualization.svg)
+![Visualização: Antes e Depois do Git-Limpa-Branches](./docs/images/git-limpa-branches-visualization.png)
 
 O diagrama acima mostra como Git-Limpa-Branches simplifica seu repositório, removendo branches mesclados e mantendo apenas branches ainda em desenvolvimento e os branches protegidos.
 
