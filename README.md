@@ -51,6 +51,42 @@ npm install git-limpa-branches --save-dev
 npx git-limpa-branches
 ```
 
+## 🛠️ Opções de Linha de Comando
+
+Você pode personalizar a execução do Git-Limpa-Branches através de parâmetros CLI:
+
+```bash
+pnpx git-limpa-branches -h
+```
+
+### 📖 Ajuda
+
+Exibe a descrição do utilitário e as opções disponíveis:
+
+```bash
+git-limpa-branches -h
+```
+
+### 🛡️ Especificando Branches Protegidos
+
+Defina explicitamente quais branches devem ser protegidos (ou seja, **não serão excluídos**) usando a opção `--protegidos` ou `-p`, com os nomes separados por vírgula:
+
+```bash
+git-limpa-branches --protegidos=main,producao,homologacao
+```
+
+ou
+
+```bash
+git-limpa-branches -p main,release
+```
+
+Se nenhum valor for informado, o padrão será:
+
+```
+main,master,develop
+```
+
 ## 💻 Desenvolvimento
 
 Para desenvolver e contribuir com o projeto:
@@ -109,6 +145,8 @@ Por padrão, os seguintes branches nunca serão excluídos:
 - master
 - develop
 
+Você também pode sobrescrever essa lista com a opção `--protegidos`.
+
 ## 🧪 Testes
 
 ```bash
@@ -118,7 +156,7 @@ npm test
 
 ## ⚙️ Personalização
 
-Para adicionar ou remover branches protegidos, edite a constante `BRANCHES_PROTEGIDOS` no arquivo `git-limpa-branches.js`:
+Para adicionar ou remover branches protegidos por padrão, edite a constante `BRANCHES_PROTEGIDOS` no arquivo `git-limpa-branches.js`:
 
 ```javascript
 // Branches protegidos
