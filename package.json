@@ -1,12 +1,24 @@
 {
   "name": "git-limpa-branches",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Utilitário para limpeza segura de branches Git",
   "type": "module",
   "main": "dist/git-limpa-branches.js",
   "bin": {
     "git-limpa-branches": "./dist/git-limpa-branches.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/devix-tecnologia/git-limpa-branches"
+  },
+  "bugs": {
+    "url": "https://github.com/devix-tecnologia/git-limpa-branches/issues"
+  },
+  "homepage": "https://github.com/devix-tecnologia/git-limpa-branches#readme",
+  "files": [
+    "dist/",
+    "docs/"
+  ],
   "scripts": {
     "build": "tsc",
     "dev": "tsc -w",
@@ -27,7 +39,7 @@
     "utility",
     "git-tool"
   ],
-  "author": "",
+  "author": "Sidarta Veloso",
   "license": "MIT",
   "dependencies": {
     "minimist": "^1.2.8"

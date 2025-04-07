@@ -19,3 +19,5 @@ yarn-error.log*
 
 #coverage reports
 coverage/
+
+.DS_Store
