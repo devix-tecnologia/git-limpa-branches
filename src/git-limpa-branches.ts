@@ -64,8 +64,14 @@ const BRANCHES_PROTEGIDOS: string[] = argv.protegidos
 // Inicializa o serviço
 const gitService = new GitLimpaBranchesService(BRANCHES_PROTEGIDOS);
 
-// Se o arquivo for executado diretamente (não importado como módulo)
+console.log('import.meta.url:', import.meta.url);
+console.log('process.argv[1]:', process.argv[1]);
+console.log('Condição:', import.meta.url === `file://${process.argv[1]}`);
 if (import.meta.url === `file://${process.argv[1]}`) {
+  console.log('Executando main()...');
+
+  // Se o arquivo for executado diretamente (não importado como módulo)
+  // if (import.meta.url === `file://${process.argv[1]}`) {
   // Executa a função principal
   gitService.main().catch((erro) => {
     const cores = gitService.getCores();
