@@ -84,7 +84,7 @@ git-limpa-branches -p main,release
 Se nenhum valor for informado, o padrão será:
 
 ```
-main,master,develop
+main,master,develop,gh-pages
 ```
 
 ## 💻 Desenvolvimento
@@ -160,7 +160,7 @@ Para adicionar ou remover branches protegidos por padrão, edite a constante `BR
 
 ```javascript
 // Branches protegidos
-const BRANCHES_PROTEGIDOS = ['main', 'master', 'develop', 'homologacao'];
+const BRANCHES_PROTEGIDOS = ['main', 'master', 'develop', 'homologacao', "gh-pages"];
 ```
 
 ## 📋 Requisitos

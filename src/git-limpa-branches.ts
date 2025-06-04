@@ -13,7 +13,7 @@ import { GitLimpaBranchesService } from './git-limpa-branches-service.js';
 const parsedArgs: ParsedArgs = minimist(process.argv.slice(2), {
   string: ['protegidos'],
   alias: { p: 'protegidos', h: 'help' },
-  default: { protegidos: 'main,master,develop' },
+  default: { protegidos: 'main,master,develop,gh-pages' },
 });
 
 const argv: ArgvOptions = {
@@ -62,14 +62,7 @@ function isRunningAsMainScript(): boolean {
   const currentFileName = basename(currentFilePath);
   const executedFileName = basename(process.argv[1] || '');
 
-  // Logs para depuração
-  console.debug('import.meta.url:', import.meta.url);
-  console.debug('process.argv[1]:', process.argv[1]);
-  console.debug('currentFileName:', currentFileName);
-  console.debug('executedFileName:', executedFileName);
   const isMain = currentFileName === 'git-limpa-branches.js' || executedFileName === 'git-limpa-branches';
-  console.log('Condição (isRunningAsMainScript):', isMain);
-
   return isMain;
 }
 
