@@ -1,6 +1,6 @@
 {
   "name": "git-limpa-branches",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Utilitário para limpeza segura de branches Git",
   "type": "module",
   "main": "dist/git-limpa-branches.js",
